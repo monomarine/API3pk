@@ -25,6 +25,19 @@ namespace API3pk.Controllers
         {
             return students;
         }
+
+        [HttpGet("{id}")]
+        public Student Get(int id)
+        {
+            return students.FirstOrDefault(s => s.Id == id);
+        }
+        [HttpPost]
+        public Student AddStudent([FromBody] Student student)
+        {
+            student.Id = students.Count + 1;
+            students.Add(student);
+            return students[students.Count-1];
+        }
     }
 
     public class Student
